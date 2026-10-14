@@ -335,6 +335,16 @@ body {
   font-size: 1.4rem;
 }
 
+.display-result.digit-pop {
+  animation: digitPop 0.12s cubic-bezier(0, 0, 0.2, 1);
+}
+
+@keyframes digitPop {
+  0% { transform: scale(1.04); filter: brightness(1.25); }
+  100% { transform: scale(1); filter: brightness(1); }
+}
+
+
 .angle-mode-badge {
   position: absolute;
   top: 12px;
@@ -379,6 +389,8 @@ body {
 
 /* --- Key Buttons --- */
 .key {
+  touch-action: manipulation;
+  -webkit-touch-callout: none;
   font-family: var(--font-sans);
   font-size: 1.15rem;
   font-weight: 600;

@@ -1,5 +1,5 @@
 /* CalcPro Service Worker for Offline PWA Support */
-const CACHE_NAME = 'calcpro-v1.0.0';
+const CACHE_NAME = 'calcpro-v1.0.1';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',

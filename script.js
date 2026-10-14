@@ -135,6 +135,13 @@ const stdCalc = (() => {
 
   const opSymbols = { '+': '+', '-': '−', '*': '×', '/': '÷' };
 
+  function triggerDigitPop(el) {
+    if (!el) return;
+    el.classList.remove('digit-pop');
+    void el.offsetWidth;
+    el.classList.add('digit-pop');
+  }
+
   function handleNumber(val) {
     if (shouldReset) {
       current = val;
@@ -142,6 +149,10 @@ const stdCalc = (() => {
     } else {
       current = current === '0' ? val : current + val;
     }
+    if (operator && previous !== '') {
+      lastExpression = `${previous} ${opSymbols[operator]} ${current}`;
+    }
+    triggerDigitPop(resultEl);
     updateDisplay();
   }
 
@@ -152,6 +163,10 @@ const stdCalc = (() => {
     } else if (!current.includes('.')) {
       current += '.';
     }
+    if (operator && previous !== '') {
+      lastExpression = `${previous} ${opSymbols[operator]} ${current}`;
+    }
+    triggerDigitPop(resultEl);
     updateDisplay();
   }
 
@@ -458,24 +473,61 @@ const sciCalc = (() => {
     awaitingExponent: false,
   };
 
+  function triggerSciDigitPop() {
+    resultEl.classList.remove('digit-pop');
+    void resultEl.offsetWidth;
+    resultEl.classList.add('digit-pop');
+  }
+
   function handleSciNumber(val) {
+    if (sciState.awaitingExponent) {
+      sciState.inputBuffer = (sciState.inputBuffer === '' || sciState.inputBuffer === '0') ? val : sciState.inputBuffer + val;
+      expression = `${sciState.pendingPower}^${sciState.inputBuffer}`;
+      triggerSciDigitPop();
+      updateDisplay(sciState.inputBuffer);
+      return;
+    }
+
     if (sciState.hasResult) {
       sciState.inputBuffer = val;
       sciState.hasResult = false;
     } else {
       sciState.inputBuffer = sciState.inputBuffer === '0' ? val : sciState.inputBuffer + val;
     }
-    expression = '';
+
+    if (sciState.operator !== null && sciState.previousValue !== null) {
+      const opSymbols = { '+': '+', '-': '−', '*': '×', '/': '÷' };
+      expression = `${sciState.previousValue} ${opSymbols[sciState.operator]} ${sciState.inputBuffer}`;
+    } else {
+      expression = '';
+    }
+    triggerSciDigitPop();
     updateDisplay(sciState.inputBuffer);
   }
 
   function handleSciDecimal() {
+    if (sciState.awaitingExponent) {
+      if (!sciState.inputBuffer.includes('.')) {
+        sciState.inputBuffer = sciState.inputBuffer === '' ? '0.' : sciState.inputBuffer + '.';
+      }
+      expression = `${sciState.pendingPower}^${sciState.inputBuffer}`;
+      triggerSciDigitPop();
+      updateDisplay(sciState.inputBuffer);
+      return;
+    }
+
     if (sciState.hasResult) {
       sciState.inputBuffer = '0.';
       sciState.hasResult = false;
     } else if (!sciState.inputBuffer.includes('.')) {
       sciState.inputBuffer += '.';
     }
+
+    if (sciState.operator !== null && sciState.previousValue !== null) {
+      const opSymbols = { '+': '+', '-': '−', '*': '×', '/': '÷' };
+      expression = `${sciState.previousValue} ${opSymbols[sciState.operator]} ${sciState.inputBuffer}`;
+    }
+    triggerSciDigitPop();
     updateDisplay(sciState.inputBuffer);
   }
 
@@ -489,6 +541,12 @@ const sciCalc = (() => {
 
     const opSymbols = { '+': '+', '-': '−', '*': '×', '/': '÷' };
     expression = `${sciState.previousValue} ${opSymbols[op]}`;
+
+    // Highlight active operator
+    document.querySelectorAll('#sci-keypad .key.op').forEach(b => b.classList.remove('active-op'));
+    const opBtn = document.querySelector(`#sci-keypad .key.op[data-value="${op}"]`);
+    if (opBtn) opBtn.classList.add('active-op');
+
     updateDisplay(sciState.inputBuffer);
   }
 
@@ -501,6 +559,8 @@ const sciCalc = (() => {
       sciState.awaitingExponent = false;
       sciState.pendingPower = null;
       sciState.hasResult = true;
+      document.querySelectorAll('#sci-keypad .key.op').forEach(b => b.classList.remove('active-op'));
+      triggerSciDigitPop();
       updateDisplay(sciState.inputBuffer);
       return;
     }
@@ -525,6 +585,8 @@ const sciCalc = (() => {
     sciState.operator = null;
     sciState.previousValue = null;
     sciState.hasResult = true;
+    document.querySelectorAll('#sci-keypad .key.op').forEach(b => b.classList.remove('active-op'));
+    triggerSciDigitPop();
     updateDisplay(sciState.inputBuffer);
   }
 
@@ -536,6 +598,7 @@ const sciCalc = (() => {
     sciState.pendingPower = null;
     sciState.awaitingExponent = false;
     expression = '';
+    document.querySelectorAll('#sci-keypad .key.op').forEach(b => b.classList.remove('active-op'));
     updateDisplay('0');
   }
 
