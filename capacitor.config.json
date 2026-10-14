@@ -1,0 +1,15 @@
+{
+  "appId": "com.dabeltech.calcpro",
+  "appName": "CalcPro",
+  "webDir": "www",
+  "bundledWebRuntime": false,
+  "server": {
+    "androidScheme": "https"
+  },
+  "android": {
+    "backgroundColor": "#0a0a1a"
+  },
+  "ios": {
+    "backgroundColor": "#0a0a1a"
+  }
+}

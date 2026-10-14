@@ -28,12 +28,17 @@ tabBtns.forEach(btn => {
 });
 
 // ===========================
-// RIPPLE EFFECT
+// RIPPLE & HAPTIC FEEDBACK
 // ===========================
 
 document.addEventListener('click', (e) => {
-  const btn = e.target.closest('.key, .swap-btn, .mode-tab, .cat-tab, .sci-toggle');
+  const btn = e.target.closest('.key, .swap-btn, .mode-tab, .cat-tab, .sci-toggle, .install-btn');
   if (!btn) return;
+
+  // Haptic feedback for mobile devices
+  if (navigator.vibrate) {
+    try { navigator.vibrate(12); } catch (_) {}
+  }
 
   const rect = btn.getBoundingClientRect();
   const ripple = document.createElement('span');
@@ -45,6 +50,55 @@ document.addEventListener('click', (e) => {
   btn.appendChild(ripple);
   setTimeout(() => ripple.remove(), 500);
 });
+
+// ===========================
+// PWA & SERVICE WORKER
+// ===========================
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js')
+      .then((reg) => console.log('ServiceWorker registered:', reg.scope))
+      .catch((err) => console.log('ServiceWorker registration failed:', err));
+  });
+}
+
+let deferredPrompt = null;
+const installBtn = document.getElementById('installBtn');
+
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  if (installBtn) installBtn.classList.add('visible');
+});
+
+if (installBtn) {
+  installBtn.addEventListener('click', async () => {
+    if (deferredPrompt) {
+      deferredPrompt.prompt();
+      const { outcome } = await deferredPrompt.userChoice;
+      if (outcome === 'accepted') {
+        installBtn.classList.remove('visible');
+      }
+      deferredPrompt = null;
+    } else {
+      // iOS / macOS / Safari guidance
+      alert('To install CalcPro on iPhone / iPad / Mac:\n\n• On iPhone/iPad (Safari): Tap the Share button at the bottom, then choose "Add to Home Screen".\n• On Mac (Safari): Go to File > "Add to Dock".\n• On Chrome/Edge: Click the Install icon in the address bar.');
+    }
+  });
+}
+
+window.addEventListener('appinstalled', () => {
+  if (installBtn) installBtn.classList.remove('visible');
+});
+
+// Show install button for iOS when not already running standalone
+const isIos = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+if (isIos && !isStandalone && installBtn) {
+  installBtn.classList.add('visible');
+}
+
 
 
 // ===========================

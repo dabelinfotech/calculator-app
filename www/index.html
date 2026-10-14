@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CalcPro — Smart Calculator & Unit Converter</title>
+  <meta name="description" content="A premium calculator app with standard, scientific, and unit conversion capabilities including length and volume conversions." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- PWA & Mobile Meta Tags -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#0a0a1a" />
+  <meta name="mobile-web-app-capable" content="yes" />
+
+  <!-- Apple iOS & macOS Web App Meta Tags -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="CalcPro" />
+  <link rel="apple-touch-icon" href="icons/icon-180.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="icons/icon-180.png" />
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png" />
+  <link rel="icon" type="image/svg+xml" href="icons/icon.svg" />
+</head>
+<body>
+  <div class="app-bg">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+  </div>
+
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="logo">
+        <div class="logo-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><rect x="3" y="3" width="18" height="18" rx="4" stroke="currentColor" stroke-width="2"/><line x1="8" y1="8" x2="16" y2="8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="12" y1="4" x2="12" y2="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" transform="rotate(90 12 8)"/><circle cx="8" cy="14" r="1.2" fill="currentColor"/><circle cx="12" cy="14" r="1.2" fill="currentColor"/><circle cx="16" cy="14" r="1.2" fill="currentColor"/><circle cx="8" cy="18" r="1.2" fill="currentColor"/><circle cx="12" cy="18" r="1.2" fill="currentColor"/><circle cx="16" cy="18" r="1.2" fill="currentColor"/></svg>
+        </div>
+        <span class="logo-text">CalcPro</span>
+      </div>
+      <button class="install-btn" id="installBtn" aria-label="Install App" title="Install App">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        <span>Install</span>
+      </button>
+    </header>
+
+    <!-- Mode Tabs -->
+    <nav class="mode-tabs" id="modeTabs">
+      <button class="mode-tab active" data-mode="standard" id="tab-standard">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="4" width="16" height="16" rx="3"/><line x1="8" y1="10" x2="16" y2="10" stroke-linecap="round"/><line x1="8" y1="14" x2="16" y2="14" stroke-linecap="round"/></svg>
+        <span>Standard</span>
+      </button>
+      <button class="mode-tab" data-mode="scientific" id="tab-scientific">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
+        <span>Scientific</span>
+      </button>
+      <button class="mode-tab" data-mode="converter" id="tab-converter">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="17 1 21 5 17 9"/><line x1="3" y1="5" x2="21" y2="5"/><polyline points="7 23 3 19 7 15"/><line x1="21" y1="19" x2="3" y2="19"/></svg>
+        <span>Converter</span>
+      </button>
+      <div class="tab-indicator" id="tabIndicator"></div>
+    </nav>
+
+    <!-- Calculator Panels -->
+    <main class="panels-wrapper">
+
+      <!-- ==================== STANDARD CALCULATOR ==================== -->
+      <section class="panel active" id="panel-standard">
+        <div class="display-area" id="std-display-area">
+          <div class="display-expression" id="std-expression"></div>
+          <div class="display-result" id="std-result">0</div>
+        </div>
+        <div class="keypad standard-keypad" id="std-keypad">
+          <button class="key fn" data-action="clear" id="std-clear">AC</button>
+          <button class="key fn" data-action="sign" id="std-sign">±</button>
+          <button class="key fn" data-action="percent" id="std-percent">%</button>
+          <button class="key op" data-action="operator" data-value="/" id="std-div">÷</button>
+
+          <button class="key num" data-action="number" data-value="7" id="std-7">7</button>
+          <button class="key num" data-action="number" data-value="8" id="std-8">8</button>
+          <button class="key num" data-action="number" data-value="9" id="std-9">9</button>
+          <button class="key op" data-action="operator" data-value="*" id="std-mul">×</button>
+
+          <button class="key num" data-action="number" data-value="4" id="std-4">4</button>
+          <button class="key num" data-action="number" data-value="5" id="std-5">5</button>
+          <button class="key num" data-action="number" data-value="6" id="std-6">6</button>
+          <button class="key op" data-action="operator" data-value="-" id="std-sub">−</button>
+
+          <button class="key num" data-action="number" data-value="1" id="std-1">1</button>
+          <button class="key num" data-action="number" data-value="2" id="std-2">2</button>
+          <button class="key num" data-action="number" data-value="3" id="std-3">3</button>
+          <button class="key op" data-action="operator" data-value="+" id="std-add">+</button>
+
+          <button class="key num zero" data-action="number" data-value="0" id="std-0">0</button>
+          <button class="key num" data-action="decimal" id="std-dot">.</button>
+          <button class="key eq" data-action="equals" id="std-eq">=</button>
+        </div>
+      </section>
+
+      <!-- ==================== SCIENTIFIC CALCULATOR ==================== -->
+      <section class="panel" id="panel-scientific">
+        <div class="display-area" id="sci-display-area">
+          <div class="display-expression" id="sci-expression"></div>
+          <div class="display-result" id="sci-result">0</div>
+          <div class="angle-mode-badge" id="sci-angle-badge">RAD</div>
+        </div>
+        <div class="sci-toggle-row">
+          <button class="sci-toggle active" id="sci-rad-btn" data-angle="rad">RAD</button>
+          <button class="sci-toggle" id="sci-deg-btn" data-angle="deg">DEG</button>
+          <button class="sci-toggle" id="sci-inv-btn" data-fn="inv">INV</button>
+        </div>
+        <div class="keypad scientific-keypad" id="sci-keypad">
+          <!-- Row 1: Scientific functions -->
+          <button class="key sci" data-action="sci-fn" data-value="sin" id="sci-sin">sin</button>
+          <button class="key sci" data-action="sci-fn" data-value="cos" id="sci-cos">cos</button>
+          <button class="key sci" data-action="sci-fn" data-value="tan" id="sci-tan">tan</button>
+          <button class="key sci" data-action="sci-fn" data-value="log" id="sci-log">log</button>
+          <button class="key sci" data-action="sci-fn" data-value="ln" id="sci-ln">ln</button>
+
+          <!-- Row 2 -->
+          <button class="key sci" data-action="sci-fn" data-value="sqrt" id="sci-sqrt">√</button>
+          <button class="key sci" data-action="sci-fn" data-value="square" id="sci-square">x²</button>
+          <button class="key sci" data-action="sci-fn" data-value="cube" id="sci-cube">x³</button>
+          <button class="key sci" data-action="sci-fn" data-value="power" id="sci-power">xʸ</button>
+          <button class="key sci" data-action="sci-fn" data-value="factorial" id="sci-fact">x!</button>
+
+          <!-- Row 3 -->
+          <button class="key sci" data-action="sci-fn" data-value="pi" id="sci-pi">π</button>
+          <button class="key sci" data-action="sci-fn" data-value="e" id="sci-e">e</button>
+          <button class="key sci" data-action="sci-fn" data-value="abs" id="sci-abs">|x|</button>
+          <button class="key sci" data-action="sci-fn" data-value="exp" id="sci-exp">eˣ</button>
+          <button class="key sci" data-action="sci-fn" data-value="tenx" id="sci-10x">10ˣ</button>
+
+          <!-- Row 4: Standard keys -->
+          <button class="key fn" data-action="clear" id="sci-clear">AC</button>
+          <button class="key fn" data-action="backspace" id="sci-back">⌫</button>
+          <button class="key fn" data-action="paren" data-value="(" id="sci-lparen">(</button>
+          <button class="key fn" data-action="paren" data-value=")" id="sci-rparen">)</button>
+          <button class="key op" data-action="operator" data-value="/" id="sci-div">÷</button>
+
+          <!-- Row 5 -->
+          <button class="key num" data-action="number" data-value="7" id="sci-7">7</button>
+          <button class="key num" data-action="number" data-value="8" id="sci-8">8</button>
+          <button class="key num" data-action="number" data-value="9" id="sci-9">9</button>
+          <button class="key op" data-action="operator" data-value="*" id="sci-mul">×</button>
+          <button class="key fn" data-action="sign" id="sci-sign">±</button>
+
+          <!-- Row 6 -->
+          <button class="key num" data-action="number" data-value="4" id="sci-4">4</button>
+          <button class="key num" data-action="number" data-value="5" id="sci-5">5</button>
+          <button class="key num" data-action="number" data-value="6" id="sci-6">6</button>
+          <button class="key op" data-action="operator" data-value="-" id="sci-sub">−</button>
+          <button class="key fn" data-action="percent" id="sci-percent">%</button>
+
+          <!-- Row 7 -->
+          <button class="key num" data-action="number" data-value="1" id="sci-1">1</button>
+          <button class="key num" data-action="number" data-value="2" id="sci-2">2</button>
+          <button class="key num" data-action="number" data-value="3" id="sci-3">3</button>
+          <button class="key op" data-action="operator" data-value="+" id="sci-add">+</button>
+          <button class="key eq sci-eq" data-action="equals" id="sci-eq" rowspan="2">=</button>
+
+          <!-- Row 8 -->
+          <button class="key num sci-zero" data-action="number" data-value="0" id="sci-0">0</button>
+          <button class="key num" data-action="decimal" id="sci-dot">.</button>
+          <!-- = spans 2 rows via CSS -->
+        </div>
+      </section>
+
+      <!-- ==================== UNIT CONVERTER ==================== -->
+      <section class="panel" id="panel-converter">
+        <div class="converter-category-tabs" id="converterCategoryTabs">
+          <button class="cat-tab active" data-category="length" id="cat-length">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 12h20M6 8l-4 4 4 4M18 8l4 4-4 4"/></svg>
+            Length
+          </button>
+          <button class="cat-tab" data-category="volume" id="cat-volume">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 17l3.5-7L12 17M12 17l3.5-7L19 17M5 17h14"/><rect x="6" y="17" width="12" height="4" rx="1"/></svg>
+            Volume
+          </button>
+          <button class="cat-tab" data-category="weight" id="cat-weight">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3a4 4 0 0 0-4 4h8a4 4 0 0 0-4-4z"/><rect x="4" y="7" width="16" height="14" rx="2"/></svg>
+            Weight
+          </button>
+          <button class="cat-tab" data-category="temperature" id="cat-temperature">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z"/></svg>
+            Temp
+          </button>
+        </div>
+
+        <div class="converter-body">
+          <!-- From -->
+          <div class="converter-field" id="converter-from-field">
+            <label class="converter-label">From</label>
+            <div class="converter-input-row">
+              <input type="number" class="converter-input" id="converter-from-input" placeholder="Enter value" value="1" />
+              <select class="converter-select" id="converter-from-unit"></select>
+            </div>
+          </div>
+
+          <!-- Swap Button -->
+          <button class="swap-btn" id="converter-swap" aria-label="Swap units">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="7 3 3 7 7 11"/><line x1="3" y1="7" x2="21" y2="7"/><polyline points="17 13 21 17 17 21"/><line x1="21" y1="17" x2="3" y2="17"/></svg>
+          </button>
+
+          <!-- To -->
+          <div class="converter-field" id="converter-to-field">
+            <label class="converter-label">To</label>
+            <div class="converter-input-row">
+              <input type="text" class="converter-input result-input" id="converter-to-input" readonly />
+              <select class="converter-select" id="converter-to-unit"></select>
+            </div>
+          </div>
+
+          <!-- Conversion formula -->
+          <div class="conversion-formula" id="conversion-formula"></div>
+
+          <!-- Quick Reference Table -->
+          <div class="quick-ref" id="quick-ref">
+            <h3 class="quick-ref-title">Quick Reference</h3>
+            <div class="quick-ref-grid" id="quick-ref-grid"></div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <span class="footer-text">Powered by <span class="footer-brand">Dabeltech</span></span>
+    </footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
