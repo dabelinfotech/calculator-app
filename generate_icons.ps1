@@ -120,4 +120,5 @@ if (!(Test-Path $iconDir)) { New-Item -ItemType Directory -Path $iconDir }
 Generate-CalcProIcon 180 "$iconDir\icon-180.png"
 Generate-CalcProIcon 192 "$iconDir\icon-192.png"
 Generate-CalcProIcon 512 "$iconDir\icon-512.png"
+Generate-CalcProIcon 1024 "$iconDir\icon-1024.png"
 Write-Output "Icons generated successfully!"

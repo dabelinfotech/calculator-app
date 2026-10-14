@@ -11,8 +11,8 @@
     "open:ios": "npx cap open ios",
     "build:apk": "node sync-web.js && npx cap sync android && cd android && gradlew assembleDebug",
     "desktop": "node sync-web.js && electron .",
-    "dist:win": "node sync-web.js && electron-builder --win nsis portable",
-    "dist:mac": "node sync-web.js && electron-builder --mac dmg"
+    "dist:win": "node sync-web.js && electron-builder --win nsis portable --publish never",
+    "dist:mac": "node sync-web.js && electron-builder --mac dmg --publish never"
   },
   "keywords": [
     "calculator",
@@ -53,7 +53,7 @@
         "nsis",
         "portable"
       ],
-      "signAndEditExecutable": false
+      "signExecutable": false
     },
     "nsis": {
       "oneClick": false,
