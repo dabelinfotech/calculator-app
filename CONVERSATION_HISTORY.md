@@ -149,4 +149,54 @@ calculator-app/
      - `CalcPro-1.0.0-mac-x64.dmg` (131.7 MB) — macOS Intel
      - `CalcPro-iOS-unsigned.ipa` (0.7 MB) — Apple iOS (iPhone/iPad)
 
+---
+
+## 10. Second Number Input Display & Tap Latency Fix
+
+> *"any second number that is pressed on the calculator is not showing on the screen immediately it is pressed fix it"*
+
+### Root Causes & Remediation:
+1. **Live Expression Updates in Standard & Scientific Modes (`script.js`)**:
+   - In `stdCalc`, entering the second operand did not update `lastExpression` until `=` was pressed, leaving the user with an outdated top expression line.
+   - In `sciCalc`, entering any second digit explicitly executed `expression = ''`, wiping the operator context (`8 +`) completely.
+   - **Fix**: Expression bars now update dynamically as every single digit of the second number is typed (`8 + 5`, `8 + 52`, etc.).
+2. **Same-Digit Input Feedback (`digit-pop`)**:
+   - If operand 1 and operand 2 shared the same value (e.g. `5 + 5`), the primary result display remained at `5`, giving the illusion of an unresponsive tap.
+   - **Fix**: Integrated a zero-latency `digit-pop` CSS animation on every keypress to confirm immediate input response.
+3. **Elimination of Mobile 300ms Delay (`style.css`)**:
+   - Mobile browsers implement a 300ms delay after initial taps to monitor for potential double-tap zoom gestures.
+   - **Fix**: Enforced `touch-action: manipulation;` and `-webkit-touch-callout: none;` across all buttons and keys.
+4. **Cache Invalidation**:
+   - Service worker cache version incremented to `calcpro-v1.0.1` ensuring client devices instantly load the updated script.
+
+---
+
+## 11. Rebranding to ZinoxCalc & Release v1.1.0
+
+> *"change the name of the calculator to zinoxcalc"*
+
+### Changes Implemented:
+1. **User Interface & Markup (`index.html`)**:
+   - Header logo updated to `<span class="logo-text">ZinoxCalc</span>`.
+   - Title changed to `<title>ZinoxCalc — Smart Calculator & Unit Converter</title>`.
+   - Apple Web App Title updated to `ZinoxCalc`.
+2. **PWA Configuration (`manifest.json` & `sw.js`)**:
+   - Application name updated to `"ZinoxCalc — Calculator & Unit Converter"`.
+   - `short_name` set to `"ZinoxCalc"`.
+   - Service Worker cache renamed to `zinoxcalc-v1.0.0`.
+3. **Application Icons & Vector Assets (`icons/`, `generate_icons.ps1`)**:
+   - Vector SVG and multi-platform PNG icons re-rendered with "ZinoxCalc" branding.
+   - Android launcher mipmaps and iOS AppIcon set refreshed.
+4. **Desktop & Mobile Configuration (`package.json`, `capacitor.config.json`, `android/`, `electron/`)**:
+   - Electron window title updated to `ZinoxCalc`.
+   - Android application name set to `ZinoxCalc`, package identifier `com.dabeltech.zinoxcalc`.
+   - Capacitor configuration updated with `appName: "ZinoxCalc"`.
+   - Local Windows installers built: `ZinoxCalc-Setup-1.0.0.exe` and `ZinoxCalc-Portable-1.0.0.exe`.
+5. **CI/CD Pipeline & GitHub Release**:
+   - Updated `.github/workflows/build-installers.yml` with `ZinoxCalc-` artifact names.
+   - Committed, tagged with `v1.1.0`, and pushed to GitHub repository:
+     - Repository: [https://github.com/dabelinfotech/calculator-app](https://github.com/dabelinfotech/calculator-app)
+     - Release: `v1.1.0`
+
+
 
