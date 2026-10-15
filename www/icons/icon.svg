@@ -28,7 +28,7 @@
   <rect x="64" y="64" width="384" height="96" rx="28" fill="#12122a" fill-opacity="0.75" stroke="#a78bfa" stroke-width="2" stroke-opacity="0.4"/>
   
   <!-- Display Digits (Digital 42.0) -->
-  <text x="416" y="132" font-family="-apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="52" fill="#f0f0ff" text-anchor="end" letter-spacing="2">CalcPro</text>
+  <text x="416" y="132" font-family="-apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-weight="700" font-size="46" fill="#f0f0ff" text-anchor="end" letter-spacing="1">ZinoxCalc</text>
 
   <!-- Keypad Buttons Grid -->
   <!-- Row 1 -->

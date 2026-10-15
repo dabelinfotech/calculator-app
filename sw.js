@@ -1,5 +1,5 @@
-/* CalcPro Service Worker for Offline PWA Support */
-const CACHE_NAME = 'calcpro-v1.0.1';
+/* ZinoxCalc Service Worker for Offline PWA Support */
+const CACHE_NAME = 'zinoxcalc-v1.0.0';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',

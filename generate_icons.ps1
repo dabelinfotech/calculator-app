@@ -41,14 +41,14 @@ function Generate-CalcProIcon {
     $g.DrawRectangle($hdrPen, $hdrX, $hdrY, $hdrW, $hdrH)
 
     # Title in Header
-    $fontSize = [float]($size * 0.09)
+    $fontSize = [float]($size * 0.08)
     $font = New-Object System.Drawing.Font("Arial", $fontSize, [System.Drawing.FontStyle]::Bold)
     $txtBrush = New-Object System.Drawing.SolidBrush([System.Drawing.Color]::FromArgb(255, 240, 240, 255))
     $sf = New-Object System.Drawing.StringFormat
     $sf.Alignment = [System.Drawing.StringAlignment]::Center
     $sf.LineAlignment = [System.Drawing.StringAlignment]::Center
     $hdrRect = New-Object System.Drawing.RectangleF($hdrX, $hdrY, $hdrW, $hdrH)
-    $g.DrawString("CalcPro", $font, $txtBrush, $hdrRect, $sf)
+    $g.DrawString("ZinoxCalc", $font, $txtBrush, $hdrRect, $sf)
 
     # Draw 4x4 Grid of keys
     $gridY = [int]($size * 0.38)

@@ -1,8 +1,8 @@
 {
-  "name": "calcpro",
-  "productName": "CalcPro",
+  "name": "zinoxcalc",
+  "productName": "ZinoxCalc",
   "version": "1.0.0",
-  "description": "CalcPro - Standard, Scientific Calculator & Multi-Unit Converter for Web, Android, iOS, Windows & macOS",
+  "description": "ZinoxCalc - Standard, Scientific Calculator & Multi-Unit Converter for Web, Android, iOS, Windows & macOS",
   "main": "electron/main.js",
   "scripts": {
     "start": "npx serve . -l 3000",
@@ -35,8 +35,8 @@
     "@capacitor/ios": "^8.5.3"
   },
   "build": {
-    "appId": "com.dabeltech.calcpro",
-    "productName": "CalcPro",
+    "appId": "com.dabeltech.zinoxcalc",
+    "productName": "ZinoxCalc",
     "copyright": "Copyright © 2026 Dabeltech",
     "directories": {
       "output": "release"
@@ -60,11 +60,11 @@
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
       "createStartMenuShortcut": true,
-      "shortcutName": "CalcPro",
-      "artifactName": "CalcPro-Setup-${version}.exe"
+      "shortcutName": "ZinoxCalc",
+      "artifactName": "ZinoxCalc-Setup-${version}.exe"
     },
     "portable": {
-      "artifactName": "CalcPro-Portable-${version}.exe"
+      "artifactName": "ZinoxCalc-Portable-${version}.exe"
     },
     "mac": {
       "target": [
@@ -74,7 +74,7 @@
       "identity": null
     },
     "dmg": {
-      "artifactName": "CalcPro-${version}-mac-${arch}.dmg"
+      "artifactName": "ZinoxCalc-${version}-mac-${arch}.dmg"
     }
   },
   "devDependencies": {

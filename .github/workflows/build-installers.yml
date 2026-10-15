@@ -31,11 +31,11 @@ jobs:
         run: |
           chmod +x gradlew
           ./gradlew assembleDebug
-      - run: cp android/app/build/outputs/apk/debug/app-debug.apk CalcPro-Android.apk
+      - run: cp android/app/build/outputs/apk/debug/app-debug.apk ZinoxCalc-Android.apk
       - uses: actions/upload-artifact@v4
         with:
           name: android
-          path: CalcPro-Android.apk
+          path: ZinoxCalc-Android.apk
 
   windows:
     name: Windows EXE
@@ -91,11 +91,11 @@ jobs:
         run: |
           mkdir -p Payload
           cp -R ios/App/build/Build/Products/Release-iphoneos/App.app Payload/
-          zip -qr CalcPro-iOS-unsigned.ipa Payload
+          zip -qr ZinoxCalc-iOS-unsigned.ipa Payload
       - uses: actions/upload-artifact@v4
         with:
           name: ios
-          path: CalcPro-iOS-unsigned.ipa
+          path: ZinoxCalc-iOS-unsigned.ipa
 
   release:
     name: Publish Release
@@ -109,14 +109,14 @@ jobs:
           merge-multiple: true
       - uses: softprops/action-gh-release@v2
         with:
-          name: CalcPro ${{ github.ref_name }}
+          name: ZinoxCalc ${{ github.ref_name }}
           files: dist/*
           body: |
-            ## CalcPro Installers — Powered by Dabeltech
+            ## ZinoxCalc Installers — Powered by Dabeltech
             | Platform | File |
             |---|---|
-            | Windows (installer) | `CalcPro-Setup-*.exe` |
-            | Windows (no install) | `CalcPro-Portable-*.exe` |
-            | macOS (Intel & Apple Silicon) | `CalcPro-*-mac-*.dmg` |
-            | Android | `CalcPro-Android.apk` |
-            | iPhone / iPad | `CalcPro-iOS-unsigned.ipa` (needs sideloading or re-signing) |
+            | Windows (installer) | `ZinoxCalc-Setup-*.exe` |
+            | Windows (no install) | `ZinoxCalc-Portable-*.exe` |
+            | macOS (Intel & Apple Silicon) | `ZinoxCalc-*-mac-*.dmg` |
+            | Android | `ZinoxCalc-Android.apk` |
+            | iPhone / iPad | `ZinoxCalc-iOS-unsigned.ipa` (needs sideloading or re-signing) |

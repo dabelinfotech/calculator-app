@@ -1,6 +1,6 @@
 {
-  "appId": "com.dabeltech.calcpro",
-  "appName": "CalcPro",
+  "appId": "com.dabeltech.zinoxcalc",
+  "appName": "ZinoxCalc",
   "webDir": "www",
   "bundledWebRuntime": false,
   "server": {

@@ -1,6 +1,6 @@
 {
-  "name": "CalcPro — Calculator & Unit Converter",
-  "short_name": "CalcPro",
+  "name": "ZinoxCalc — Calculator & Unit Converter",
+  "short_name": "ZinoxCalc",
   "description": "Premium Standard & Scientific Calculator with Live Length, Volume, Weight & Temperature Unit Converter",
   "start_url": "./index.html",
   "scope": "./",

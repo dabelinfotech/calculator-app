@@ -1,5 +1,5 @@
 /* ================================================
-   CalcPro — Application Logic
+   ZinoxCalc — Application Logic
    ================================================ */
 
 // ===========================
@@ -83,7 +83,7 @@ if (installBtn) {
       deferredPrompt = null;
     } else {
       // iOS / macOS / Safari guidance
-      alert('To install CalcPro on iPhone / iPad / Mac:\n\n• On iPhone/iPad (Safari): Tap the Share button at the bottom, then choose "Add to Home Screen".\n• On Mac (Safari): Go to File > "Add to Dock".\n• On Chrome/Edge: Click the Install icon in the address bar.');
+      alert('To install ZinoxCalc on iPhone / iPad / Mac:\n\n• On iPhone/iPad (Safari): Tap the Share button at the bottom, then choose "Add to Home Screen".\n• On Mac (Safari): Go to File > "Add to Dock".\n• On Chrome/Edge: Click the Install icon in the address bar.');
     }
   });
 }

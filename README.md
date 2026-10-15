@@ -1,8 +1,8 @@
-# CalcPro — Smart Calculator & Unit Converter
+# ZinoxCalc — Smart Calculator & Unit Converter
 
 A modern, responsive calculator and multi-unit converter application available as an **Installable Mobile PWA** (Android, Apple iOS/iPhone, macOS) and as a **Native Mobile App** (Android Studio & iOS Xcode projects via Capacitor).
 
-![CalcPro](https://img.shields.io/badge/Platforms-Android%20%7C%20iOS%20%7C%20macOS%20%7C%20Web-blueviolet)
+![ZinoxCalc](https://img.shields.io/badge/Platforms-Android%20%7C%20iOS%20%7C%20macOS%20%7C%20Web-blueviolet)
 ![License](https://img.shields.io/badge/License-MIT-brightgreen)
 ![PWA](https://img.shields.io/badge/PWA-Ready-success)
 
@@ -10,7 +10,7 @@ A modern, responsive calculator and multi-unit converter application available a
 
 ## 📱 Mobile App Options
 
-CalcPro is fully ready for mobile in two ways:
+ZinoxCalc is fully ready for mobile in two ways:
 
 ### 1. Instant Mobile Install (PWA — Progressive Web App)
 Works out-of-the-box with **no app store required**, works **offline**, has **haptic feedback**, and adds an app icon to your home screen or dock.
@@ -24,7 +24,7 @@ Works out-of-the-box with **no app store required**, works **offline**, has **ha
   1. Open the calculator URL in Safari.
   2. Tap the **Share** button (`⎙` / square with arrow) at the bottom.
   3. Scroll down and tap **"Add to Home Screen"**.
-  4. Tap **Add** — CalcPro will appear with its native app icon and run full screen.
+  4. Tap **Add** — ZinoxCalc will appear with its native app icon and run full screen.
 
 * **On Apple macOS (Mac):**
   * **Safari (macOS Sonoma / Sequoia):** Go to `File` > **"Add to Dock"**.
@@ -34,7 +34,7 @@ Works out-of-the-box with **no app store required**, works **offline**, has **ha
 
 ### 2. Native Mobile Projects (Capacitor for Android & iOS)
 Pre-configured native projects located in:
-* `android/` — Native Android Studio project (`com.dabeltech.calcpro`)
+* `android/` — Native Android Studio project (`com.dabeltech.zinoxcalc`)
 * `ios/` — Native Apple Xcode project for iOS & macOS Catalyst
 
 #### Useful NPM Commands:

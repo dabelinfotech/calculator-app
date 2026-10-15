@@ -8,7 +8,7 @@ function createWindow() {
     minWidth: 360,
     minHeight: 640,
     backgroundColor: '#0a0a1a',
-    title: 'CalcPro',
+    title: 'ZinoxCalc',
     icon: path.join(__dirname, '..', 'icons', 'icon-512.png'),
     autoHideMenuBar: true,
     webPreferences: {
